@@ -79,7 +79,7 @@ function DeleteCookie(name)
 function SetCookieText(name, expirationDate)
 {
     var value = "null";
-    if (!document.getElementById("message").value)
+    if (document.getElementById("message").value != null || document.getElementById("message").value != "")
         value = document.getElementById("message").value;
     console.log(value);
     CreateCookie(name, value, expirationDate);
