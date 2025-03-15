@@ -58,7 +58,7 @@ function ReadCookie(cookie_name)
     }
 
     //If the cookie is not found, print an error message
-    console.error("ERROR: COOKIE NOT FOUND");
+    console.warn("ERROR: COOKIE NOT FOUND");
     return ""; //Return nothing
 }
 
