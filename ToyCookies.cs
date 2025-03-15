@@ -73,7 +73,18 @@ function DeleteCookie(name)
 }
 
 /**
+* Changes the cookie from textbox.
+* For testing purposes only.
+*/
+function SetCookieText(name, expirationDate)
+{
+    var value = document.getElementById(message).value();
+    CreateCookie(name, value, expirationDate);
+}
+
+/**
  * Changes the text on the website to the cookie data.
+ * For testing purposes only.
  */
 function ChangeCookieDisplayText(name)
 {
