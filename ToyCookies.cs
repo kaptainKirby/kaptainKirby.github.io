@@ -127,8 +127,8 @@ function SaveFile()
     //Adds the URL link to the created link. the contents of the URL link are the cookies
     downloadlink.href = dataToSaveAsURL;
 
-    //When the link is clicked, it can no longer be clicked again
-    downloadlink.onclick = destroyClickEvent;
+    //Makes link invisible and not interactable
+    downloadlink.style.display = "none";
 
     //Adds download link to the body of the page
     document.body.appendChild(downloadlink);
@@ -196,11 +196,6 @@ function CreateCookieDataFromFile(data)
 
     data = data.substring(indexOfSemiColon + 1);
     return data;
-}
-
-function destroyClickEvent()
-{
-    document.body.removeChild(event.target);
 }
 
 /**
