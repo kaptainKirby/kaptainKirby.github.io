@@ -112,14 +112,11 @@ function SaveFile()
     //Converts Blob to a URL link, which acts as the value stored inside the text file
     var dataToSaveAsURL = window.URL.createObjectURL(dataToBlob);
 
-    //Names the file. Makes the file into a .txt (text) file
-    var fileNameSaveAs = "TaskMasterSaveData.txt";
-
     //Creates a new link object
     var downloadlink = document.createElement("a");
 
-    //Names the download file
-    downloadlink.download = fileNameSaveAs;
+    //Names the download file. Makes it a .txt (text) file.
+    downloadlink.download = "TaskMasterSaveData.txt";
 
     //Adds the URL link to the created link. the contents of the URL link are the cookies
     downloadlink.href = dataToSaveAsURL;
