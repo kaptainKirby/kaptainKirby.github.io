@@ -121,6 +121,9 @@ function SaveFile()
     //Names the download file
     downloadlink.download = fileNameSaveAs;
 
+    //Sets what text the link displays on the page - Catch case - shouldn't actually need this
+    downloadlink.innerHTML = "Download File";
+
     //Adds the URL link to the created link. the contents of the URL link are the cookies
     downloadlink.href = dataToSaveAsURL;
 
