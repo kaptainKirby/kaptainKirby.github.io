@@ -40,6 +40,7 @@ function ReadCookie(cookie_name)
     //Gets all cookies related to this website
     //This returns a long string of cookies, all separated by semicolons
     var decodedCookies = decodeURIComponent(document.cookie);
+    console.log(decodedCookies);
     //Splits the cookie string into numerous individual cookie strings inside an array
     var cookieArray = decodedCookies.split(';');
     //Loops over array of cookie data
@@ -81,6 +82,8 @@ function SetCookieText(name, expirationDate)
     var value = document.getElementById("message").value;
     console.log(value);
     CreateCookie(name, value, expirationDate);
+
+    CreateCookie("Test", "TESTING", expirationDate);
 }
 
 /**
