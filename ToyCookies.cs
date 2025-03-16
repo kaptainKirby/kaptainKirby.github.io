@@ -95,6 +95,20 @@ function ChangeCookieDisplayText(name)
     document.getElementById("CookieText").innerHTML = ReadCookie(name);
 }
 
+function Download()
+{
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
 /**
  * Quality of life function that automatically formats the expiration time and date for cookie usage
  * Setting days to negative will make the cookie expire immediately, thus deleting the cookie
