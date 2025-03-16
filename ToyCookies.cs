@@ -127,6 +127,9 @@ function SaveFile()
     //Adds the URL link to the created link. the contents of the URL link are the cookies
     downloadlink.href = dataToSaveAsURL;
 
+    //Makes link invisible and not interactable
+    downloadlink.style.display = "none";
+
     //Adds download link to the body of the page
     document.body.appendChild(downloadlink);
 
