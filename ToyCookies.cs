@@ -28,6 +28,9 @@ function CreateCookie(name, value, expirationDate)
     console.log(name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/');
 }
 
+
+var decodedCookies;
+
 /**
  * 
  * @param {string} cookie_name 
@@ -39,8 +42,7 @@ function ReadCookie(cookie_name)
 
     //Gets all cookies related to this website
     //This returns a long string of cookies, all separated by semicolons
-    var decodedCookies = decodeURIComponent(document.cookie);
-    console.log(decodedCookies);
+    decodedCookies = decodeURIComponent(document.cookie);
     //Splits the cookie string into numerous individual cookie strings inside an array
     var cookieArray = decodedCookies.split(';');
     //Loops over array of cookie data
@@ -95,18 +97,37 @@ function ChangeCookieDisplayText(name)
     document.getElementById("CookieText").innerHTML = ReadCookie(name);
 }
 
-function Download()
+function SaveFile()
 {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
+    var data = decodedCookies;
+    console.log(data);
 
-    element.style.display = 'none';
-    document.body.appendChild(element);
+    //Converts the data to a plain text Blob
+    //A blob is a raw data type that is immutable. It can be read as binary or as text and can be converted into a ReadableStream.
+    var dataToBlob = new Blob([data], {type:"text/plain"});
 
-    element.click();
+    //Converts Blob to a URL
+    var dataToSaveAsURL = window.URL.createObjectURL(dataToBlob);
+    var fileNameSaveAs = "TaskMasterSaveData.txt";
 
-    document.body.removeChild(element);
+    //Creates a new link object
+    var downloadlink = document.createElement("a");
+    downloadlink.download = fileNameSaveAs;
+    downloadlink.innerHTML = "Download File";
+    downloadlink.href = dataToSaveAsURL;
+    downloadlink.onclick = destroyClickEvent;
+
+    downloadlink.style.display = "none";
+
+    document.body.appendChild(downloadlink);
+
+    downloadlink.click();
+
+}
+
+function destroyClickEvent()
+{
+    document.body.removeChild(event.target);
 }
 
 /**

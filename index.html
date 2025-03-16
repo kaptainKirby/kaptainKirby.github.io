@@ -11,8 +11,17 @@
         <button type="button" onclick="SetCookieText('username', 400)">Create Cookie</button>
         <button type="button" onclick="ChangeCookieDisplayText('username')">Read Cookie</button>
         <br><br>
-        <button type="button" onclick="Download()">Download Cookies</button>
-        <a href="data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A">dwonload... maybe</a>
+        <table>
+            <tr>
+                <td><button onclick="SaveFile()">Save to File</button></td>
+            </tr>
+            <tr>
+                <td><input type="file" id="fileToLoad"></td>
+                <td><button onclick="LoadFile()">Load File</button></td>
+            </tr>
+        </table>
+
+        <a id="saveFile" href="data:application/octet-stream,field1%2Cfield2%0Afoo%2Cbar%0Agoo%2Cgai%0A">Download?</a>
 
         <script src="ToyCookies.cs"></script>
     </body>
