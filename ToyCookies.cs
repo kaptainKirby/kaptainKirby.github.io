@@ -24,8 +24,8 @@
 function CreateCookie(name, value, expirationDate)
 {
     //Creates a cookie with the specified name, and expiration date (in days)
-    document.cookie = name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/';
-    console.log(name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/');
+    document.cookie = name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/; Secure; HttpOnly; SameSite=Lax';
+    console.log(name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/; Secure; HttpOnly; SameSite=Lax');
 }
 
 
