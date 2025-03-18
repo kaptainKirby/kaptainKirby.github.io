@@ -29,7 +29,7 @@ function CreateCookie(name, value, expirationDate)
 }
 
 
-var decodedCookies;
+var encyrptedCookies;
 
 /**
  * 
@@ -42,9 +42,15 @@ function ReadCookie(cookie_name)
 
     //Gets all cookies related to this website
     //This returns a long string of cookies, all separated by semicolons
-    decodedCookies = decodeURIComponent(document.cookie);
+    encyrptedCookies = document.cookie;
+    var decryptedCookies = decodeURIComponent(encyrptedCookies);
+
+    console.log("Encypted: " + encyrptedCookies);
+    console.log("Decrypted: " + decryptedCookies);
+
+    decryptedCookies = decodeURIComponent(document.cookie);
     //Splits the cookie string into numerous individual cookie strings inside an array
-    var cookieArray = decodedCookies.split(';');
+    var cookieArray = decryptedCookies.split(';');
     //Loops over array of cookie data
     for (var i = 0; i < cookieArray.length; i++)
     {
@@ -102,9 +108,8 @@ function ChangeCookieDisplayText(name)
 */
 function SaveFile()
 {
-    var data = decodedCookies;
+    var data = decodeURIComponent(encyrptedCookies);
     console.log(data);
-
     //Converts the data to a plain text Blob
     //A blob is a raw data type that is immutable. It can be read as binary or as text and can be converted into a ReadableStream.
     var dataToBlob = new Blob([data], {type:"text/plain"});
