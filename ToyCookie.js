@@ -28,12 +28,9 @@ function CreateCookie(name, value, expirationDate)
     console.log(name + '=' + value + '; ' + GetExpirationDate(expirationDate) + ' path=/; Secure; SameSite=Lax');
 }
 
-
-var decodedCookies;
-
 /**
- * 
- * @param {string} cookie_name 
+ * Finds the cookie data and reads it based off the key provided
+ * @param {string} cookie_name - the key of the cookie
  */
 function ReadCookie(cookie_name)
 {
@@ -42,7 +39,7 @@ function ReadCookie(cookie_name)
 
     //Gets all cookies related to this website
     //This returns a long string of cookies, all separated by semicolons
-    decodedCookies = decodeURIComponent(document.cookie);
+    var decodedCookies = decodeURIComponent(document.cookie);
     //Splits the cookie string into numerous individual cookie strings inside an array
     var cookieArray = decodedCookies.split(';');
     //Loops over array of cookie data
@@ -86,107 +83,6 @@ function SetCookieText(name, expirationDate)
     CreateCookie(name, value, expirationDate);
 
     CreateCookie("Test", "TESTING", expirationDate);
-}
-
-/**
- * Changes the text on the website to the cookie data.
- * For testing purposes only.
- */
-function ChangeCookieDisplayText(name)
-{
-    document.getElementById("CookieText").innerHTML = ReadCookie(name);
-}
-
-/**
-* Saves the cookies into a txt file and downloads it onto the computer
-*/
-function SaveFile()
-{
-    var data = decodedCookies;
-    console.log(data);
-
-    //Converts the data to a plain text Blob
-    //A blob is a raw data type that is immutable. It can be read as binary or as text and can be converted into a ReadableStream.
-    var dataToBlob = new Blob([data], {type:"text/plain"});
-
-    //Converts Blob to a URL link, which acts as the value stored inside the text file
-    var dataToSaveAsURL = window.URL.createObjectURL(dataToBlob);
-
-    //Creates a new link object
-    var downloadlink = document.createElement("a");
-
-    //Names the download file. Makes it a .txt (text) file.
-    downloadlink.download = "TaskMasterSaveData.txt";
-
-    //Adds the URL link to the created link. the contents of the URL link are the cookies
-    downloadlink.href = dataToSaveAsURL;
-
-    //Adds download link to the body of the page
-    document.body.appendChild(downloadlink);
-
-    //Clicks on the link
-    downloadlink.click();
-
-    //Removes link from page
-    downloadlink.remove();
-}
-
-/**
-* Loads the file selected onto the cookies
-*/
-function LoadFile(event)
-{
-    //Gets the input from the chosen file
-    var fileInput = event.target;
-
-    //Creates a reader to read a txt file
-    var reader = new FileReader();
-
-    //Once the reader has finished loading the file, get the result
-    reader.onload = function()
-    {
-        //Grabs the read data
-        var cookieData = reader.result;
-
-        //Loops forever until a semicolon is not found
-        while(cookieData.indexOf(';') != -1)
-        {
-            //Creates cookie data from text file
-            cookieData = CreateCookieDataFromFile(cookieData);
-        }
-        //Creates one more cookie for last one
-        CreateCookieDataFromFile(cookieData);
-    }
-
-    //Have the reader start reading the first file inputted. Ignore all other files.
-    reader.readAsText(fileInput.files[0]);
-}
-
-/**
-* Creates cookie data from a certain string format
-* This is a helper method, thus this should ONLY be called by LoadFile(event).
-*/
-function CreateCookieDataFromFile(data)
-{
-    //Nullifies leading white space
-    while (data.charAt(0) == ' ')
-    {
-        data = data.substring(1);
-    }
-    var indexOfEqualsSign = data.indexOf('=');
-    var indexOfSemiColon = data.indexOf(';');
-            
-
-    var name = data.substring(0, indexOfEqualsSign);
-    var value = "";
-    if (indexOfSemiColon != -1)
-        value = data.substring(indexOfEqualsSign + 1, indexOfSemiColon);
-    else
-        value = data.substring(indexOfEqualsSign + 1);
-    CreateCookie(name, value, 400);
-
-    data = data.substring(indexOfSemiColon + 1);
-    return data;
 }
 
 /**

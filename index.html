@@ -3,13 +3,13 @@
     
     <head>
         <h1>Cookie Test</h1>
-        <h2 id="CookieText">null</h2>
+        <h2 id="text">null</h2>
     </head>
     <body>
         <input id="message" placeholder="Enter name (or anything, really)" style="height: 25px; width: 200px;">
         <br><br>
-        <button type="button" onclick="SetCookieText('username', 400)">Create Cookie</button>
-        <button type="button" onclick="ChangeCookieDisplayText('username')">Read Cookie</button>
+        <button type="button" onclick="TestSetLocalStorage('username')">Create Cookie</button>
+        <button type="button" onclick="ChangeText('username')">Read Cookie</button>
         <br><br>
         <table>
             <tr>
@@ -20,6 +20,7 @@
             </tr>
         </table>
 
-        <script src="ToyCookies.cs"></script>
+        <script src="ToyLocalStorage.js"></script>
+        <script src="ToyCookie.js"></script>
     </body>
 </html>
